@@ -1,66 +1,73 @@
 ## Tweet Scraper
 
-A simple Python-based Twitter scraper that uses playwright to collect tweets and media (images) from any public Twitter profile.
-
+A simple Python-based Twitter scraper that uses Playwright to scrape tweets along with media URLs from any public Twitter profile, and outputs the data in JSON format.
 ---
 
-### Features
+## Setup Instructions
 
-- Scrape tweet **text** and **media (image URLs)** from a public profile  
-- Scrolls the page to load more tweets automatically  
-- Easy to use and extend  
-- Fully headless browser automation
-
----
-
-### Requirements
-
-- Python 3.7+
-- [Playwright](https://playwright.dev/python/)
-
----
-
-### Installation
-
-1. **Clone the repository**
+### 1. **Clone the repository**
 ```bash
 git clone https://github.com/yourusername/tweet_scraper.git
 cd tweet_scraper
 ```
 
-2. **Install dependencies**
+### 2. Install Dependencies
+Install all required packages using:
+Ensure Python 3.12 is installed on your machine.
+
 ```bash
-pip install playwright
-playwright install
+pip install -r requirements.txt
+```
+
+### 3. Configure Environment Variables
+Create a `.env` file in the project directory with the following structure:
+
+```
+TWITTER_USERNAME=your_username
+TWITTER_PASSWORD=your_password
+```
+
+### 4. Run the Scraper
+Start the scraping tool by running:
+
+```bash
+python usage04.py
 ```
 
 ---
 
-### How It Works
+## Features
 
-The scraper launches a **headless Chromium browser**, navigates to the specified Twitter profile, scrolls the page multiple times to load tweets, and extracts:
-- The **text** of each tweet
-- The **image URLs** (excluding profile pics)
-
-All the data is stored in a Python list of dictionaries for easy access and further processing.
+- **Login with Twitter credentials**
+- **Gradio UI for easy interaction**
+- **Select tweet range from 10 to 500**
+- **Live streaming of scraping progress**
+- **Tweets exported in JSON format**
+- **Headless browser automation**
 
 ---
 
-### 📝 Usage
+## Usage
 
-Create a Python script (like `usage.py`):
+- After launching the script, a Gradio UI will appear in your browser.
+- Choose the number of tweets you want to scrape (between 10 to 500).
+- A headless browser will open automatically.
+- **Do not minimize or interact with the browser** while it is running.
+- Once scraping completes, you can **download the tweets in JSON format** directly from the Gradio interface.
 
-```python
-from tweet_scraper import TweetScraper
+---
 
-scraper = TweetScraper("elonmusk")
-scraper.scrape(max_scrolls=5)
+## Troubleshooting
 
-for idx, tweet in enumerate(scraper.get_tweets()):
-    print(f"\nTweet {idx+1}")
-    print("Text:", tweet['text'][:100], "...")
-    print("Media:", tweet['media'])
-```
+- **Login fails:** Double-check your `.env` credentials.
+- **UI doesn't open:** Ensure you’re using Python 3.12 and all dependencies are installed.
+- **Browser closes unexpectedly:** Don’t minimize the browser window during scraping.
+
+---
+
+## Future Improvements (Planned)
+- Increase range of tweets 
+- Improve UI
 
 ---
 
@@ -74,27 +81,6 @@ Each tweet is stored like this:
   'media': ['https://image-url.com/image1.jpg', 'https://image-url.com/image2.jpg']
 }
 ```
-
----
-
-### Project Structure
-
-```
-tweet_scraper/
-│
-├── tweet_scraper.py      # The main scraping logic
-├── usage.py              # Example usage script
-└── README.md             # You are here
-```
-
----
-
-### Tips
-
-- Increase `max_scrolls` to scrape more tweets.
-- You can customize the `TweetScraper` to extract other content like likes, retweets, or timestamps.
-
----
 
 ### Disclaimer
 
